@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>{{ question.title}}</h1>
+  <ul>
+    {% for choice in question.choice_set.all %}
+      <li>{{ choice.choice_text }}</li>
+    {% endfor %}
+  </ul>
+
+  {% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+  {% endif %}
+
+  <form action="{% url 'polls:vote' question.id %}" method="post">
+    {% csrf_token %}
+    {% for choice in question.choice_set.all %}
+      <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+      <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+    {% endfor %}
+    <input type="submit" value="Vote" />
+  </form>
+
+  <h2>Responses</h2>
+  <ul>
+    {% for answer in answers %}
+      <li>{{ answer.choice.choice_text }} - {{ answer.votes }} votes</li>
+    {% empty %}
+      <li>No responses yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+
+
+
+{% extends 'base.html' %}
+{% block title %}
+  Question
+{% endblock %}
+{% block content %}
+  <ul class="list-unstyled px-2">
+    <li class="d-flex align-items-start  rounded p-3 mb-3">
+        <div class="col-md-2">
+
+          <div d-flex align-items-center>
+            <img src="{{ question.author.avatar}}" alt="avatar" style="width: 80px; height: 80px; border-radius: 50%;">
+          </div>
+
+          <div class="d-flex align-items-end justify-content-end" style="width: 80px; height: 80px;">
+            <div class="d-flex align-items-end justify-content-end border border-dark rounded" style="width: 80px; height: 45px;">
+              <div class="col-md-6" style="height: 100%; width: 65%;">
+                <input type="text" class="form-control form-control-sm h-100" value="0">
+              </div>
+              <div class="col-md-6" style="height: 100%; width: 35%;">
+                <button class="btn btn-dark w-100" style="height: 50%; display: flex; justify-content: center; align-items: center;">+</button>
+                <button class="btn btn-dark w-100" style="height: 50%; display: flex; justify-content: center; align-items: center;">-</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-10">
+          <div class="d-flex justify-content-start align-items-start">
+            <h3 class="font-weight-bold">{{ question.title}}</h3>
+          </div>
+
+          <div>
+            <p style="display: -webkit-box; -webkit-box-orient: vertical; text-overflow: ellipsis;">
+              {{ question.text}}
+            </p>
+          </div>
+
+
+          <div class="d-flex flex-column">
+            <div class="mt-auto">
+              {% for tag in question.tags.all %}
+                <a href="{% url 'tag_questions' tag.slug %}" style="margin-right: 10px;">{{ tag }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+    </li>
+
+    {% for answer in answers %}
+    <li class="d-flex align-items-start border border-dark rounded p-3 mb-3" style="height: 200px; overflow: hidden;">
+        <div class="col-md-2">
+
+          <div d-flex align-items-center>
+            <img src="{{answer.author.avatar}}" alt="avatar" style="width: 80px; height: 80px; border-radius: 50%;">
+          </div>
+
+          <div class="d-flex align-items-end justify-content-end" style="width: 80px; height: 80px;">
+            <div class="d-flex align-items-end justify-content-end border border-dark rounded" style="width: 80px; height: 45px;">
+              <div class="col-md-6" style="height: 100%; width: 65%;">
+                <input type="text" class="form-control form-control-sm h-100" value="0">
+              </div>
+              <div class="col-md-6" style="height: 100%; width: 35%;">
+                <button class="btn btn-dark w-100" style="height: 50%; display: flex; justify-content: center; align-items: center;">+</button>
+                <button class="btn btn-dark w-100" style="height: 50%; display: flex; justify-content: center; align-items: center;">-</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-10">
+          <div style="height: 130px; overflow: hidden;">
+            <p style="margin: 0; -webkit-line-clamp: 5; display: -webkit-box; -webkit-box-orient: vertical; text-overflow: ellipsis;">
+              {{answer.text}}
+            </p>
+          </div>
+
+
+          <div class="row d-flex justify-content-start " style="height: 30px">
+                <div class="d-flex align-items-center">
+                  <input type="checkbox" id="myCheckbox" name="myCheckbox">
+                  <label for="myCheckbox" style="margin-left: 10px;">Correct</label>
+                </div>
+          </div>
+        </div>
+    </li>
+    
+  <form class="d-flex flex-column px-2 py-2">
+      <textarea name="myTextarea" placeholder="Введите текст" rows="5" style="width: 100%; height: 100%; margin-bottom: 10px;"></textarea>
+      <button type="submit" class="btn btn-dark" style="width: 15%;">Отправить</button>
+  </form>
+{% endblock %}
+
+{% block footer %}
+  <div class="row align-items-start justify-content-start w-100">
+    <div class="col-md-9 px-3 py-2">
+      <div class="col-md-12 d-flex align-items-center px-2">
+        <nav>
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link btn-outline-dark" href="#" style="border-color: black; color: black;">1</a></li>
+            <li class="page-item"><a class="page-link btn-outline-dark" href="#" style="border-color: black; color: black;">2</a></li>
+            <li class="page-item"><a class="page-link btn-outline-dark" href="#" style="border-color: black; color: black;">3</a></li>
+            <li class="page-item"><a class="page-link btn-outline-dark" href="#" style="border-color: black; color: black;">...</a></li>
+            <li class="page-item"><a class="page-link btn-outline-dark" href="#" style="border-color: black; color: black;">53</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  {% endblock %}

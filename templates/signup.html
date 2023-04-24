@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% block title %}
+  SignUp
+{% endblock %}
+{% block content %}
+  <div class="col-md-12 d-flex align-items-center px-2">
+    <h3>Registration</h3>
+  </div>
+
+  <div class="d-flex justify-content-start align-items-start px-2 py-2" style="height: 100%;">
+    <p class="m-0 text-danger">Sorry, input error</p>
+  </div>
+
+  <div class="d-flex align-items-start">
+    <div class="col-md-2">
+      <div class="d-flex justify-content-start align-items-start px-2" style="height: 100%;">
+        <p class="m-0">Login</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <form class="d-flex flex-column px-2 py-2">
+        <textarea name="myTextarea" placeholder="Введите текст" rows="1" maxlength="50" style="width: 100%; height: 100%; margin-bottom: 10px;"></textarea>
+      </form>
+    </div>
+  </div>
+
+  <div class="d-flex align-items-start">
+    <div class="col-md-2">
+      <div class="d-flex justify-content-start align-items-start px-2" style="height: 100%;">
+        <p class="m-0">Email</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <form class="d-flex flex-column px-2 py-2">
+        <textarea name="myTextarea" placeholder="Введите текст" rows="1" maxlength="50" style="width: 100%; height: 100%; margin-bottom: 10px;"></textarea>
+      </form>
+    </div>
+  </div>
+
+  <div class="d-flex align-items-start">
+    <div class="col-md-2">
+      <div class="d-flex justify-content-start align-items-start px-2" style="height: 100%;">
+        <p class="m-0">NickName</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <form class="d-flex flex-column px-2 py-2">
+        <textarea name="myTextarea" placeholder="Введите текст" rows="1" maxlength="50" style="width: 100%; height: 100%; margin-bottom: 10px;"></textarea>
+      </form>
+    </div>
+  </div>
+
+  <div class="d-flex align-items-start">
+    <div class="col-md-2">
+      <div class="d-flex justify-content-start align-items-start px-2" style="height: 100%;">
+        <p class="m-0">Password</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <form class="d-flex flex-column px-2 py-2">
+        <textarea name="myTextarea" placeholder="Введите текст" rows="1" maxlength="50" style="width: 100%; height: 100%; margin-bottom: 10px;"></textarea>
+      </form>
+    </div>
+  </div>
+
+  <div class="d-flex align-items-start">
+    <div class="col-md-2">
+      <div class="d-flex justify-content-start align-items-start px-2" style="height: 100%;">
+        <p class="m-0">Repeat password</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <form class="d-flex flex-column px-2 py-2">
+        <textarea name="myTextarea" placeholder="Введите текст" rows="1" maxlength="50" style="width: 100%; height: 100%; margin-bottom: 10px;"></textarea>
+      </form>
+    </div>
+  </div>
+
+  <div class="d-flex align-items-start">
+    <div class="col-md-2">
+      <div class="d-flex justify-content-start align-items-start px-2" style="height: 100%;">
+        <p class="m-0">Upload avatar</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="row">
+          <div class="col">
+            <p id="file-path">No file chosen</p>
+          </div>
+          <div class="col">
+            <button class="btn btn-dark w-100" onclick="document.getElementById('file-input').click()">Choose</button>
+            <input type="file" id="file-input" style="display: none" onchange="handleFile(this.files)">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex align-items-start">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-10">
+      <div class="d-flex flex-column px-2 py-2">
+        <button type="submit" class="btn btn-dark" style="width: 15%;">Отправить</button>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block foot %}
+<div class="row align-items-start justify-content-start w-100">
+  <div class="col-md-9 px-3 py-2">
+    <div class="col-md-12 d-flex align-items-center px-2">
+      <nav>
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link btn-outline-dark" href="#" style="border-color: black; color: black;">1</a></li>
+          <li class="page-item"><a class="page-link btn-outline-dark" href="#" style="border-color: black; color: black;">2</a></li>
+          <li class="page-item"><a class="page-link btn-outline-dark" href="#" style="border-color: black; color: black;">3</a></li>
+          <li class="page-item"><a class="page-link btn-outline-dark" href="#" style="border-color: black; color: black;">...</a></li>
+          <li class="page-item"><a class="page-link btn-outline-dark" href="#" style="border-color: black; color: black;">53</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+{% endblock %}

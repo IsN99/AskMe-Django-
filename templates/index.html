@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %}
+  Index
+{% endblock %}
+{% block content %}
+<div class="col-md-12 d-flex align-items-center px-2">
+  <h3>New Questions</h3>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="#">Hot questions</a>
+</div>    
+  
+<ul class="list-unstyled px-2">
+  {% for question in questions %}
+  <li class="d-flex align-items-start border border-dark rounded p-3 mb-3" style="height: 200px; overflow: hidden;">
+      <div class="col-md-2">
+
+        <div d-flex align-items-center>
+          <img src="{{ question.author.avatar }}" alt="avatar" style="width: 80px; height: 80px; border-radius: 50%;">
+        </div>
+
+        <div class="d-flex align-items-end justify-content-end" style="width: 80px; height: 80px;">
+          <div class="d-flex align-items-end justify-content-end border border-dark rounded" style="width: 80px; height: 45px;">
+            <div class="col-md-6" style="height: 100%; width: 65%;">
+              <input type="text" class="form-control form-control-sm h-100" value="0">
+            </div>
+            <div class="col-md-6" style="height: 100%; width: 35%;">
+              <button class="btn btn-dark w-100" style="height: 50%; display: flex; justify-content: center; align-items: center;">+</button>
+              <button class="btn btn-dark w-100" style="height: 50%; display: flex; justify-content: center; align-items: center;">-</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-10">
+        <div class="d-flex justify-content-start align-items-start" style="height: 30px">
+          <a href="question.html"><h5 class="font-weight-bold">{{ question.title }}</h5></a>
+        </div>
+        <div style="height: 100px; overflow: hidden;">
+          <p style="margin: 0; -webkit-line-clamp: 4; display: -webkit-box; -webkit-box-orient: vertical; text-overflow: ellipsis;">
+            {{ question.text }}
+          </p>
+        </div>
+
+
+        <div class="d-flex flex-column" style="height: 30px">
+          <div class="mt-auto">
+            <div class="d-flex justify-content-start align-items-end" style="height: 30px">
+              <a href="{{ question.get_absolute_url }}" style="margin-right: 20px" class="answer-link" data-count="{{ question.answer_count }}">answer ({{ question.answer_count }})</a>
+              <b style="margin-right: 10px;">Tags:</b>
+              {% for tag in question.tags.all %}
+                <a href="{% url 'tag_questions' tag.slug %}" style="margin-right: 10px;">{{ tag }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+  </li>
+  {% endfor %}  
+</ul>  
+{% endblock %}
+
+{% block foot %}<div class="row align-items-start justify-content-start w-100">
+    <div class="col-md-9 px-3 py-2">
+      <div class="col-md-12 d-flex align-items-center px-2">
+        <nav>
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link btn-outline-dark" href="#" style="border-color: black; color: black;">1</a></li>
+            <li class="page-item"><a class="page-link btn-outline-dark" href="#" style="border-color: black; color: black;">2</a></li>
+            <li class="page-item"><a class="page-link btn-outline-dark" href="#" style="border-color: black; color: black;">3</a></li>
+            <li class="page-item"><a class="page-link btn-outline-dark" href="#" style="border-color: black; color: black;">...</a></li>
+            <li class="page-item"><a class="page-link btn-outline-dark" href="#" style="border-color: black; color: black;">53</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>  
+{% endblock %}
+
+
