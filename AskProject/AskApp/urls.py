@@ -6,3 +6,5 @@ urlpatterns = [
     path('', views.index),
     path('question/<int:question_id>/', views.questions),
 ]
+
+handler404 = views.pageNotFound
